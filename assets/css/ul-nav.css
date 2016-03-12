@@ -3,10 +3,37 @@
     Author     : Ezra Obiwale <contact@ezraobiwale.com>
 */
 
-/* Giving a background-color to the nav container. */
+
 .nav {
-    margin-bottom: 10px;
-    background-color: #E64A19;
+    width:100%;
+}
+.nav-fixed-top {
+    position:fixed;
+    top:0;
+    left:0;
+}
+.nav-fixed-bottom {
+    position:fixed;
+    bottom:0;
+    left:0;
+    margin-bottom: 0;
+    margin-top: 10px;
+}
+.nav-stacked {
+    width:auto!important;
+    margin:0;
+    display:inline-block!important;
+    min-width:200px;
+    text-overflow: ellipsis;
+    left:auto;
+}
+.nav-stacked.nav-fixed-left {
+    position:fixed;
+    left:0!important;
+}
+.nav-stacked.nav-fixed-right {
+    position:fixed;
+    right:0!important;
 }
 
 /* Since we'll have the "ul li" "float:left"
@@ -26,27 +53,16 @@
     position: relative;
 }
 
+.nav.nav-stacked li {
+    height:60px;
+}
+
 /* Positioning the .navigation items inline */
-.nav ul li {
+.nav:not(.nav-stacked)>ul>li {
     margin: 0px;
     display:inline-block;
     float: left;
     background-color: #E64A19;
-}
-
-/* Styling the links */
-.nav a {
-    display:block;
-    padding:0 10px;
-    color:#FFF;
-    font-size:20px;
-    line-height: 60px;
-    text-decoration:none;
-}
-
-/* Background color change on hover and for active links */
-.nav a:hover, .nav li.active {
-    background-color: #000;
 }
 
 /* Hide Dropdowns by Default
@@ -54,7 +70,27 @@
 .nav ul ul {
     display: none;
     position: absolute;
-    /*top: 100%;*/
+}
+.nav.nav-stacked ul ul li   {
+    top:-60px;
+}
+.nav.nav-stacked:not(.nav-fixed-left):not(.nav-fixed-right) ul ul {
+    position: relative;
+}
+.nav.nav-stacked.nav-fixed-bottom ul ul {
+    top:auto;
+    bottom:-60px;
+}
+.nav.nav-stacked ul ul {
+    left:100%;
+}
+.nav.nav-stacked.nav-fixed-right ul ul {
+    right:100%;
+    left:-100%;
+}
+
+.nav.nav-fixed-bottom ul ul {
+    top:-60px;
 }
 
 /* Display Dropdowns on Hover */
@@ -80,6 +116,29 @@
     left:100%;
 }
 
+// Styling
+
+/* Giving a background-color to the nav container. */
+.nav {
+    margin-bottom: 10px;
+    background-color: #E64A19;
+}
+
+/* Styling the links */
+.nav a {
+    display:block;
+    padding:0 10px;
+    color:#FFF;
+    font-size:20px;
+    line-height: 60px;
+    text-decoration:none;
+}
+
+/* Background color change on hover and for active links */
+.nav a:hover, .nav li.active {
+    background-color: #000;
+}
+
 /* Change ' ::.' in order to change the Dropdown symbol */
-.nav li > a:after { content:  ' ::.'; }
+.nav li > a:after { content:  ' :..'; }
 .nav li > a:only-child:after { content: ''; }

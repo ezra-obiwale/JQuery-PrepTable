@@ -4,31 +4,43 @@
         <meta charset="UTF-8">
         <title></title>
         <link type="text/css" rel="stylesheet" href="assets/css/jquery-table.min.css" />
-        <link type="text/css" rel="stylesheet" href="assets/css/ul-nav.min.css" />
+        <link type="text/css" rel="stylesheet" href="assets/css/ul-nav.css" />
+        <style>
+            body {
+                padding-top:60px;
+            }
+            .nav, .nav ul li {
+                background-color:#000!important;
+            }
+            .nav> ul> li:hover> a,
+            .nav> ul> li:hover> ul li:hover a {
+                background-color:#fff;
+                color:#000;
+                border:1px solid;
+            }
+        </style>
     </head>
     <body>
-        <nav class="nav">
+        <nav class="nav nav-fixed-top">
             <ul>
-                <li><a href="#">Home</a></li>
-                <li><a href="#">WordPress</a>
-                    <!-- First Tier Drop Down -->
+                <li><a href="./">Home</a></li>
+                <li><a href="#usage">Usage</a>
                     <ul>
-                        <li><a href="#">Themes</a></li>
-                        <li><a href="#">Plugins</a></li>
-                        <li><a href="#">Tutorials</a>
-                            <!-- Second Tier Drop Down -->
-                            <ul>
-                                <li><a href="#">Stuff</a></li>
-                                <li><a href="#">Things</a></li>
-                                <li><a href="#">Other Stuff</a></li>
-                            </ul>
-                        </li>
+                        <li><a href="#files">Files</a></li>
+                        <li><a href="#default">Default</a></li>
+                        <li><a href="#config">Configuration</a></li>
+                        <li><a href="#custom-row">Customize Row</a></li>
                     </ul>
                 </li>
-                <li><a href="#">Graphic Design</a></li>
-                <li><a href="#">Inspiration</a></li>
-                <li><a href="#">Contact</a></li>
-                <li><a href="#">About</a></li>
+                <li><a href="#example-list">Examples</a>
+                    <ul>
+                        <li><a href="#existing-table">Existing Table</a></li>
+                        <li><a href="#js-data">JS Data</a></li>
+                        <li><a href="#">Ajax</a></li>
+                        <li><a href="#custom-row">Customize Row</a></li>
+                    </ul>
+                </li>
+                <li><a href="#author">Author</a></li>
             </ul>
         </nav>
         <table width="100%" border="1" cellspacing="0">
@@ -43,7 +55,7 @@
             </thead>
         </table>
         <script src="assets/js/jquery.min.js"></script>
-        <script src="assets/js/jquery-table.min.js"></script>
+        <script src="assets/js/jquery-table.js"></script>
         <script>
             $(function () {
                 $('table').table({
@@ -65,13 +77,7 @@
                             sortable: false
                         }
                     ],
-//        data: [
-                    //            ['one', 'two', 'three', 'four', 'five'],
-                    //            {
-                    //                one: 1, two: 2, three: 3, four: 4, five: 5, six: 6
-//            }
-                    //        ],
-                    ajax: 'data.php',
+                    ajax: 'example-data.php',
                     append: false,
                     limits: {values: [1, 2, 3, 4, 5],
                         default: 3,
@@ -83,7 +89,12 @@
                         numbers: true
                     },
                     alert_errors: false,
-                    display_errors: true
+                    display_errors: true,
+                    customRow: function (row, data) {
+                        $(row).children().each(function (i, v) {
+                            $(v).html('(' + data[i] + ')');
+                        });
+                    }
                 });
             });
         </script>

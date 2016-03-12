@@ -27,7 +27,9 @@
             display_errors: false,
             log_errors: true,
             log_data: false,
-            alert_errors: true
+            alert_errors: true,
+            customizeRow: function (row, data) {
+            }
         };
         $.extend(config, settings);
         function addOrders(id) {
@@ -190,9 +192,21 @@
                     });
                 }
                 else {
-                    console.error('Data ' + (i + 1) + ' error: Data must be either an array or an object');
+                    error(id, 'T4', 'DATA.data[' + (i + 1) + '] must be either an array or an object');
                 }
+                if (typeof config.customizeRow === 'function')
+                    config.customizeRow.call($('#' + id + '>table')[0], $tr[0], v);
             });
+        }
+        function error(id, code, msg) {
+            msg = 'ERROR ' + code + ' (https://github.com/ezra-obiwale/JQuery-Table/errors/' + code + '):\r'
+                    + '  -  ' + msg;
+            if (config.log_errors)
+                console.error(msg);
+            if (config.display_errors)
+                $('#' + id + '>.msg').addClass('error active').html(msg).fadeIn();
+            if (config.alert_errors)
+                alert(msg);
         }
         function getLimit(id) {
             return parseInt($('#' + id + '>.before-table select.limit').val());
@@ -202,7 +216,8 @@
             if (!config.ajax && __data[id] && __data[id].data.length > getLimit(id)) {
                 loadData(id);
                 return;
-            }
+            } else if (!config.ajax)
+                return;
             $('#' + id + '>.msg').addClass('info').html(config.loading_message).fadeIn(function () {
                 if ($(this).hasClass('active'))
                     $(this).fadeOut();
@@ -250,7 +265,6 @@
             });
         }
         function useData(id, data) {
-            var error_msg = null;
             if (!__data[id])
                 __data[id] = {};
             if ($.isArray(data)) {
@@ -259,32 +273,28 @@
                 __data[id].total = data.length;
             }
             else if ($.isPlainObject(data))
-                if (!$.isArray(data.data))
-                    error_msg = 'ERROR T3 (https://github.com/ezra-obiwale/JQuery-Table):\r'
-                            + '  -  Response data must be an array';
-                else if (isNaN(data.total))
-                    error_msg = 'ERROR T2 (https://github.com/ezra-obiwale/JQuery-Table):\r'
-                            + '  -  Response object must contain key <total> with an integer value';
-                else if (isNaN(data.start))
-                    error_msg = 'ERROR T2 (https://github.com/ezra-obiwale/JQuery-Table):\r'
-                            + '  -  Response object must contain key <start> with an integer value';
+                if (!$.isArray(data.data)) {
+                    error(id, 'T3', 'Response data must be an array');
+                    return false;
+                }
+                else if (isNaN(data.total)) {
+                    error(id, 'T2', 'Response object must contain key <total> with an <integer value>');
+                    return false;
+                }
+                else if (isNaN(data.start)) {
+                    error(id, 'T2', 'Response object must contain key <start> with an <integer value>');
+                    return false;
+                }
                 else {
                     __data[id].data = data.data;
                     __data[id].start = data.start;
                     __data[id].total = data.total;
                 }
-            else
-                error_msg = 'ERROR T1: Data must be an array or an object.';
-            if (error_msg) {
-                if (config.log_errors)
-                    console.error(error_msg);
-                if (config.display_errors)
-                    $('#' + id + '>.msg').addClass('error').html(error_msg);
-                if (config.alert_errors)
-                    alert(error_msg);
-                return;
+            else {
+                error(id, 'T1', 'Response data must be an object');
+                return false;
             }
-            data.timeout = 0;
+            __data[id].timeout = 0;
             loadData(id);
         }
         this.each(function (i, v) {
