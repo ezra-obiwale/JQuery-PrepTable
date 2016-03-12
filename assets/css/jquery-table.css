@@ -1,0 +1,64 @@
+/* 
+    Created on : Mar 9, 2016, 10:28:44 AM
+    Author     : Ezra Obiwale <contact@ezraobiwale.com>
+*/
+
+.jq-table table > thead th.sort {
+    cursor:pointer;
+}
+.jq-table table > thead th.no-sort>span,
+.jq-table table > thead th.sort>span {
+    background-image: url('imgs/sort_both.png');
+    float:right;
+}
+.jq-table table > thead th.sort.asc>span {
+    background-image: url('imgs/sort_asc.png'),url('imgs/sort_both.png');
+}
+.jq-table table > thead th.sort.desc>span {
+    background-image: url('imgs/sort_desc.png'),url('imgs/sort_both.png');
+}
+.jq-table .before-table,
+.jq-table .after-table{
+    margin: 10px 0;
+}
+.jq-table .before-table .search {
+    float:right;
+}
+.jq-table > .msg {
+    text-align:center;
+    font-size:14px;
+    font-weight:bold;
+    display:none;
+}
+.jq-table > .msg.info {
+    background-color:lightblue;
+    color:darkblue;
+    padding:10px 5px;
+}
+.jq-table > .msg.error {
+    background-color:lightpink;
+    color:darkred;
+    padding:10px 5px;
+}
+.jq-table > .msg.success {
+    padding:10px 5px;
+    background-color:lightgreen;
+    color:darkgreen;
+}
+.jq-table .after-table .label {
+    display:inline-block;
+}
+.jq-table .after-table .pagination {
+    float:right;
+}
+.jq-table .after-table .pagination button,
+.jq-table .after-table .pagination span.ellipsis {
+    text-align:center;
+    min-width:30px;
+    height:30px;
+    margin:0 2px;
+}
+.jq-table .after-table .pagination button.current {
+    color:#000;
+    border:none;
+}
