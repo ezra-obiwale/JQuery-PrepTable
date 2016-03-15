@@ -1,0 +1,428 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Jquery-table by ezra-obiwale</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/github-dark.css">
+    <script src="javascripts/scale.fix.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>Jquery-table</h1>
+        <p>A JQuery function to load data into the table and to search, order, and paginate the data.</p>
+        <p class="view"><a href="https://github.com/ezra-obiwale/JQuery-Table">View the Project on GitHub <small>ezra-obiwale/JQuery-Table</small></a></p>
+        <ul>
+          <li><a href="https://github.com/ezra-obiwale/JQuery-Table/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/ezra-obiwale/JQuery-Table/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/ezra-obiwale/JQuery-Table">View On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <h1>
+<a id="jquery-table" class="anchor" href="#jquery-table" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>JQuery Table</h1>
+
+<hr>
+
+<p>This was created as an alternative to the JQuery DataTable because of the excessive errors gotten from there. This library is a lot easier and cleaner to use.</p>
+
+<h2>
+<a id="usage" class="anchor" href="#usage" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Usage</h2>
+
+<p>Add the following to your web page as shown below</p>
+
+<div class="highlight highlight-text-html-basic"><pre>&lt;!DOCTYPE html&gt;
+&lt;<span class="pl-ent">html</span>&gt;
+    &lt;<span class="pl-ent">head</span>&gt;
+        &lt;<span class="pl-ent">link</span> <span class="pl-e">type</span>=<span class="pl-s"><span class="pl-pds">"</span>text/css<span class="pl-pds">"</span></span> <span class="pl-e">rel</span>=<span class="pl-s"><span class="pl-pds">"</span>stylesheet<span class="pl-pds">"</span></span> <span class="pl-e">href</span>=<span class="pl-s"><span class="pl-pds">"</span>/path/to/jquery-table.min.css<span class="pl-pds">"</span></span> /&gt;
+    &lt;/<span class="pl-ent">head</span>&gt;
+    &lt;<span class="pl-ent">body</span>&gt;
+        &lt;<span class="pl-ent">table</span>&gt;
+            &lt;<span class="pl-ent">thead</span>&gt; <span class="pl-c">&lt;!-- not required --&gt;</span>
+                &lt;<span class="pl-ent">tr</span>&gt;
+                    &lt;<span class="pl-ent">th</span>&gt;First Name&lt;/<span class="pl-ent">th</span>&gt;
+                    &lt;<span class="pl-ent">th</span>&gt;Last Name&lt;/<span class="pl-ent">th</span>&gt;
+                    &lt;<span class="pl-ent">th</span>&gt;Gender&lt;/<span class="pl-ent">th</span>&gt;
+                &lt;/<span class="pl-ent">tr</span>&gt;
+            &lt;/<span class="pl-ent">thead</span>&gt;
+        &lt;/<span class="pl-ent">table</span>&gt;
+<span class="pl-s1">        &lt;<span class="pl-ent">script</span> <span class="pl-e">src</span>=<span class="pl-s"><span class="pl-pds">"</span>/path/to/jquery.js<span class="pl-pds">"</span></span>&gt;&lt;/<span class="pl-ent">script</span>&gt;</span>
+<span class="pl-s1">        &lt;<span class="pl-ent">script</span> <span class="pl-e">src</span>=<span class="pl-s"><span class="pl-pds">"</span>/path/to/jquery-table.min.js<span class="pl-pds">"</span></span>&gt;&lt;/<span class="pl-ent">script</span>&gt;</span>
+<span class="pl-s1">        &lt;<span class="pl-ent">script</span>&gt;</span>
+<span class="pl-s1">            <span class="pl-en">$</span>(<span class="pl-s"><span class="pl-pds">'</span>table<span class="pl-pds">'</span></span>).<span class="pl-en">table</span>({</span>
+<span class="pl-s1">                data<span class="pl-k">:</span> [</span>
+<span class="pl-s1">                    [<span class="pl-s"><span class="pl-pds">'</span>Ezra<span class="pl-pds">'</span></span>,<span class="pl-s"><span class="pl-pds">'</span>Obiwale<span class="pl-pds">'</span></span>,<span class="pl-s"><span class="pl-pds">'</span>Male<span class="pl-pds">'</span></span>],</span>
+<span class="pl-s1">                    [<span class="pl-s"><span class="pl-pds">'</span>Annie<span class="pl-pds">'</span></span>,<span class="pl-s"><span class="pl-pds">'</span>DiMaria<span class="pl-pds">'</span></span>,<span class="pl-s"><span class="pl-pds">'</span>Female<span class="pl-pds">'</span></span>],</span>
+<span class="pl-s1">                    [<span class="pl-s"><span class="pl-pds">'</span>Sandy<span class="pl-pds">'</span></span>,<span class="pl-s"><span class="pl-pds">'</span>Stone<span class="pl-pds">'</span></span>,<span class="pl-s"><span class="pl-pds">'</span>Female<span class="pl-pds">'</span></span>],</span>
+<span class="pl-s1">                ]</span>
+<span class="pl-s1">            });</span>
+<span class="pl-s1">        &lt;/<span class="pl-ent">script</span>&gt;</span>
+    &lt;/<span class="pl-ent">body</span>&gt;
+&lt;/<span class="pl-ent">html</span>&gt;</pre></div>
+
+<h2>
+<a id="configuration" class="anchor" href="#configuration" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Configuration</h2>
+
+<div class="highlight highlight-source-js"><pre><span class="pl-k">var</span> config <span class="pl-k">=</span> {
+        columns<span class="pl-k">:</span> [],
+        data<span class="pl-k">:</span> [],
+        ajax<span class="pl-k">:</span> <span class="pl-c1">null</span>,
+        append<span class="pl-k">:</span> <span class="pl-c1">false</span>,
+        limits<span class="pl-k">:</span> {values<span class="pl-k">:</span> [<span class="pl-c1">10</span>, <span class="pl-c1">20</span>, <span class="pl-c1">50</span>, <span class="pl-c1">100</span>, <span class="pl-c1">200</span>], all<span class="pl-k">:</span> <span class="pl-c1">true</span>, <span class="pl-k">default</span><span class="pl-k">:</span> <span class="pl-c1">10</span>},
+        searchable<span class="pl-k">:</span> <span class="pl-c1">true</span>,
+        label<span class="pl-k">:</span> <span class="pl-c1">true</span>,
+        pagination<span class="pl-k">:</span> {
+            firstLast<span class="pl-k">:</span> <span class="pl-c1">false</span>,
+            nextPrevious<span class="pl-k">:</span> <span class="pl-c1">true</span>,
+            numbers<span class="pl-k">:</span> <span class="pl-c1">false</span>,
+            maxButtons<span class="pl-k">:</span> <span class="pl-c1">12</span>
+        },
+        loading_message<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>Loading table...<span class="pl-pds">'</span></span>,
+        empty_message<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>NO ENTRIES FOUND.<span class="pl-pds">'</span></span>,
+        display_errors<span class="pl-k">:</span> <span class="pl-c1">false</span>,
+        log_errors<span class="pl-k">:</span> <span class="pl-c1">true</span>,
+        log_data<span class="pl-k">:</span> <span class="pl-c1">false</span>,
+        alert_errors<span class="pl-k">:</span> <span class="pl-c1">true</span>,
+        <span class="pl-en">createRow</span><span class="pl-k">:</span> <span class="pl-k">function</span> (<span class="pl-smi">row</span>, <span class="pl-smi">data</span>, <span class="pl-smi">index</span>) {}
+    };
+<span class="pl-en">$</span>(<span class="pl-s"><span class="pl-pds">'</span>table<span class="pl-pds">'</span></span>).<span class="pl-en">table</span>(config);</pre></div>
+
+<table>
+<thead>
+<tr>
+<th>property</th>
+<th>value</th>
+<th>default</th>
+<th>description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ajax</td>
+<td>string|object</td>
+<td>null</td>
+<td>A string path to the location of the data or an object with 2 string properties - url and type, which may be <code>'get'</code> or <code>'post'</code>.</td>
+</tr>
+<tr>
+<td>alert_errors</td>
+<td>boolean</td>
+<td>true</td>
+<td>Indicates whether to alert any errors in operation.</td>
+</tr>
+<tr>
+<td>append</td>
+<td>boolean</td>
+<td>false</td>
+<td>Indicates whether to append new rows to existing ones.</td>
+</tr>
+<tr>
+<td>columns</td>
+<td>array</td>
+<td>empty array</td>
+<td>An OPTIONAL array of objects containing information about the property to map to the <code>&lt;td&gt;</code> in each data row. Each object must have a string <code>data</code> property with the data object property as the value. This is only used by the default <code>createRow</code> function. Optionally, each object may also have boolean <code>sortable</code> and <code>searchable</code> properties indicating where the column should be sortable and searchable respectively.</td>
+</tr>
+<tr>
+<td>createRow</td>
+<td>function</td>
+<td>function</td>
+<td>The function to call to create each row data. Three parameters are passed into the function - the row object, the current data to use in creating the row, and the index of the data. The <code>this</code> object is the table.</td>
+</tr>
+<tr>
+<td>data</td>
+<td>array</td>
+<td>empty array</td>
+<td>The array of objects or arrays to load into the table.</td>
+</tr>
+<tr>
+<td>display_errors</td>
+<td>boolean</td>
+<td>false</td>
+<td>Indicates whether to display errors on the DOM.</td>
+</tr>
+<tr>
+<td>empty_message</td>
+<td>string</td>
+<td>'NO ENTRIES FOUND.'</td>
+<td>The message to show when no entries are found.</td>
+</tr>
+<tr>
+<td>label</td>
+<td>boolean</td>
+<td>true</td>
+<td>Indicates whether to show the label which contains information about the total possible rows and the number of rows current showing.</td>
+</tr>
+<tr>
+<td>limits</td>
+<td>object</td>
+<td>object</td>
+<td>Properties include <code>values</code>, which is an array of integers to use as limits, <code>all</code>, which is a boolean indicating whether to add the option to fetch all data, and <code>default</code>, which is the default limit value to use. To set the <code>all</code> as default, set <code>default</code> to <code>'all'</code>.</td>
+</tr>
+<tr>
+<td>loading_message</td>
+<td>string</td>
+<td>'Loading table ...'</td>
+<td>The message to show while loading the rows.</td>
+</tr>
+<tr>
+<td>log_data</td>
+<td>boolean</td>
+<td>false</td>
+<td>Indicates whether to log the received data in an ajax operation to the console.</td>
+</tr>
+<tr>
+<td>log_errors</td>
+<td>boolean</td>
+<td>true</td>
+<td>Indicates whether to log errors encountered to the console.</td>
+</tr>
+<tr>
+<td>pagination</td>
+<td>object</td>
+<td>object</td>
+<td>Properties include boolean <code>firstLast</code>, which indicates whether to show the First and Last buttons, boolean <code>nextPrevious</code>, which indicates whether to show the Next and Previous buttons, boolean numbers, which indicates whether to show number buttons, and integer <code>maxButtons</code>, which indicates the maximum number of buttons allowed, including the First, Last, Next and Previous buttons if enabled. This defaults to 12.</td>
+</tr>
+<tr>
+<td>searchable</td>
+<td>boolean</td>
+<td>true</td>
+<td>Indicates whether the table should be searchable.</td>
+</tr>
+</tbody>
+</table>
+
+<h2>
+<a id="using-dom-dataset" class="anchor" href="#using-dom-dataset" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Using DOM Dataset</h2>
+
+<table>
+<thead>
+<tr>
+<th>data</th>
+<th>value</th>
+<th>description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>data-ajax-url</td>
+<td>string</td>
+<td>A string path to the location of the data.</td>
+</tr>
+<tr>
+<td>data-ajax-type</td>
+<td>string</td>
+<td>A string which may be <code>'get'</code> or <code>'post'</code>.</td>
+</tr>
+<tr>
+<td>data-alert-errors</td>
+<td>boolean</td>
+<td>Indicates whether to alert any errors in operation.</td>
+</tr>
+<tr>
+<td>data-append</td>
+<td>boolean</td>
+<td>Indicates whether to append new rows to existing ones.</td>
+</tr>
+<tr>
+<td>data-create-row</td>
+<td>string</td>
+<td>The name of the function to call to create each row data.</td>
+</tr>
+<tr>
+<td>data-display-errors</td>
+<td>boolean</td>
+<td>Indicates whether to display errors on the DOM.</td>
+</tr>
+<tr>
+<td>data-empty-message</td>
+<td>string</td>
+<td>The message to show when no entries are found.</td>
+</tr>
+<tr>
+<td>data-label</td>
+<td>boolean</td>
+<td>Indicates whether to show the label which contains information about the total possible rows and the number of rows current showing.</td>
+</tr>
+<tr>
+<td>data-limits-values</td>
+<td>string</td>
+<td>A comma separated string of integers.</td>
+</tr>
+<tr>
+<td>data-limits-all</td>
+<td>boolean</td>
+<td>Indicates whether to add the option to fetch all data.</td>
+</tr>
+<tr>
+<td>data-limits-default</td>
+<td>integer|string</td>
+<td>The default limit value to use. To set the <code>all</code> as default, set to <code>'all'</code>.</td>
+</tr>
+<tr>
+<td>data-loading-message</td>
+<td>string</td>
+<td>The message to show while loading the rows.</td>
+</tr>
+<tr>
+<td>data-log-data</td>
+<td>boolean</td>
+<td>Indicates whether to log the received data in an ajax operation to the console.</td>
+</tr>
+<tr>
+<td>data-log-errors</td>
+<td>boolean</td>
+<td>Indicates whether to log errors encountered to the console.</td>
+</tr>
+<tr>
+<td>data-pagination-first-last</td>
+<td>boolean</td>
+<td>Indicates whether to show the First and Last buttons.</td>
+</tr>
+<tr>
+<td>data-pagination-next-previous</td>
+<td>boolean</td>
+<td>Indicates whether to show the Next and Previous buttons.</td>
+</tr>
+<tr>
+<td>data-pagination-numbers</td>
+<td>boolean</td>
+<td>Indicates whether to show number buttons.</td>
+</tr>
+<tr>
+<td>data-pagination-max-button</td>
+<td>integer</td>
+<td>Indicates the maximum number of buttons allowed, including the First, Last, Next and Previous buttons if enabled. This defaults to 12.</td>
+</tr>
+<tr>
+<td>data-searchable</td>
+<td>boolean</td>
+<td>Indicates whether the table should be searchable.</td>
+</tr>
+</tbody>
+</table>
+
+<h2>
+<a id="ajax" class="anchor" href="#ajax" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Ajax</h2>
+
+<h3>
+<a id="request" class="anchor" href="#request" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Request</h3>
+
+<p>When fetching data by ajax, the following variables are sent to the page to aid in fetching the right data.</p>
+
+<table>
+<thead>
+<tr>
+<th>Variable</th>
+<th>Value</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>limit</td>
+<td>integer</td>
+<td>The number of rows to fetch</td>
+</tr>
+<tr>
+<td>order</td>
+<td>array</td>
+<td>Keys include <code>column</code>, which is the column to order the data by, and <code>dir</code>, which indicates the direction to order the data. <code>dir</code> values may be either <code>'asc'</code> or <code>'desc'</code>.</td>
+</tr>
+<tr>
+<td>search</td>
+<td>array</td>
+<td>Keys include <code>columns</code>, which is a comma-separated string of columns to search based on <code>searchable</code> option set for each column, and <code>value</code>, which is the string being searched.</td>
+</tr>
+<tr>
+<td>start</td>
+<td>integer</td>
+<td>The number of row to start fetching the data from</td>
+</tr>
+</tbody>
+</table>
+
+<h3>
+<a id="response" class="anchor" href="#response" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Response</h3>
+
+<p>A <code>JSON</code> object response is expected with the following properties.</p>
+
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Value</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>data</td>
+<td>array</td>
+<td>Array of row objects fetched according to the request</td>
+</tr>
+<tr>
+<td>total</td>
+<td>integer</td>
+<td>The number of all possible rows to fetch</td>
+</tr>
+</tbody>
+</table>
+
+<h2>
+<a id="errors" class="anchor" href="#errors" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Errors</h2>
+
+<table>
+<thead>
+<tr>
+<th>Code</th>
+<th>Message</th>
+<th>Explanation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>T0</strong></td>
+<td>Error in connection [responseText]</td>
+<td>This error is generated if there's an error in connecting to the ajax url provided</td>
+</tr>
+<tr>
+<td><strong>T1</strong></td>
+<td>Response data must be an object</td>
+<td>The response data must be an object. See <a href="#response">Response</a>.</td>
+</tr>
+<tr>
+<td><strong>T2</strong></td>
+<td>Response object must contain key <code>&lt;total&gt;</code> with an <code>&lt;integer value&gt;</code>
+</td>
+<td>The response object must have property <code>total</code> with an integer value. See <a href="#response">Response</a>
+</td>
+</tr>
+<tr>
+<td><strong>T3</strong></td>
+<td>Data in <code>&lt;Response&gt;</code> must be an array</td>
+<td>The <code>data</code> property of the response object must be an array. See <a href="#response">Response</a>.</td>
+</tr>
+<tr>
+<td><strong>T4</strong></td>
+<td>DATA.data[<code>&lt;index&gt;</code>] must be either an array or an object</td>
+<td>This means the data with the given index is not an array or object and should be either. See <a href="#response">Response</a>.</td>
+</tr>
+</tbody>
+</table>
+      </section>
+    </div>
+    <footer>
+      <p>Project maintained by <a href="https://github.com/ezra-obiwale">ezra-obiwale</a></p>
+      <p>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></p>
+    </footer>
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+    
+  </body>
+</html>
