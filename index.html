@@ -86,6 +86,7 @@
         log_errors<span class="pl-k">:</span> <span class="pl-c1">true</span>,
         log_data<span class="pl-k">:</span> <span class="pl-c1">false</span>,
         alert_errors<span class="pl-k">:</span> <span class="pl-c1">true</span>,
+        cache<span class="pl-k">:</span><span class="pl-c1">false</span>,
         <span class="pl-en">createRow</span><span class="pl-k">:</span> <span class="pl-k">function</span> (<span class="pl-smi">row</span>, <span class="pl-smi">data</span>, <span class="pl-smi">index</span>) {}
     };
 <span class="pl-en">$</span>(<span class="pl-s"><span class="pl-pds">'</span>table<span class="pl-pds">'</span></span>).<span class="pl-en">table</span>(config);</pre></div>
@@ -117,6 +118,12 @@
 <td>boolean</td>
 <td>false</td>
 <td>Indicates whether to append new rows to existing ones.</td>
+</tr>
+<tr>
+<td>cache</td>
+<td>boolean</td>
+<td>false</td>
+<td>Indicates whether to cache the fetched rows or not.</td>
 </tr>
 <tr>
 <td>columns</td>
@@ -224,6 +231,11 @@
 <td>data-append</td>
 <td>boolean</td>
 <td>Indicates whether to append new rows to existing ones.</td>
+</tr>
+<tr>
+<td>data-cache</td>
+<td>boolean</td>
+<td>Indicates whether to cache the fetched rows or not.</td>
 </tr>
 <tr>
 <td>data-create-row</td>
