@@ -211,6 +211,7 @@
             if (!__page_data[id])
                 __page_data[id] = {};
             __page_data[id]['rows'] = $('#' + id + '>table>tbody>tr');
+            __data[id].total = __page_data[id].rows.length;
             if (getLimit(id) !== '') { // show limit
                 $('#' + id + '>table>tbody>tr').each(function (i, v) {
                     if (i == getLimit(id))
@@ -482,11 +483,14 @@
 
             $(v).parent().on('change', '.before-table .jq-limit>select', function () {
                 var id = $(this).closest('.jq-table').attr('id');
+                // Ensure display of data if limit is going out of boundary
+                if ($(this).val() && __data[id].start * parseInt($(this).val()) > __data[id].total)
+                    __data[id].start = Math.floor(__data[id].total / parseInt($(this).val())) - 1;
                 if (__data[id].append) {
+                    __data[id].start = 0;
                     $('#' + id + '>table>tbody').html('');
                     __page_data[id] = {};
                 }
-                __data[id].start = 0;
                 loadPage(id, __data[id].start, __data[id].append);
             });
             $(v).parent().on('click', 'table>thead>tr>th.sort', function () {
