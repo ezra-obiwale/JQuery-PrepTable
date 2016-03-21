@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <title>JQuery-Table by ezra-obiwale</title>
+    <title>JQuery-PrepTable by ezra-obiwale</title>
 
     <link rel="stylesheet" href="stylesheets/styles.css">
     <link rel="stylesheet" href="stylesheets/github-dark.css">
@@ -17,8 +17,8 @@
   <body>
     <div class="wrapper">
       <header>
-        <h1>JQuery-Table</h1>
-        <p>A JQuery function to parse table data or load data into the table and to search, order, and paginate the data.</p>
+        <h1>JQuery-PrepTable</h1>
+        <p>A JQuery plugin to prepare tables for searching, ordering, and paginating.</p>
         <p class="view"><a href="https://github.com/ezra-obiwale/JQuery-Table">View the Project on GitHub <small>ezra-obiwale/JQuery-Table</small></a></p>
         <ul>
           <li><a href="https://github.com/ezra-obiwale/JQuery-Table/zipball/master">Download <strong>ZIP File</strong></a></li>
@@ -27,7 +27,7 @@
         </ul>
       </header>
       <section>
-        <p>This was created as an alternative to the JQuery DataTable because of the excessive errors gotten from there. This library is a lot easier and cleaner to use.</p>
+        <p>This was created as an alternative to the JQuery DataTable because of the unnecessary errors gotten from there, especially with headers, and the fact it doesn't work with that tables without headers. This library is a lot easier and cleaner to use.</p>
 
 <h2>
 <a id="usage" class="anchor" href="#usage" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Usage</h2>
@@ -37,7 +37,7 @@
 <div class="highlight highlight-text-html-basic"><pre>&lt;!DOCTYPE html&gt;
 &lt;<span class="pl-ent">html</span>&gt;
     &lt;<span class="pl-ent">head</span>&gt;
-        &lt;<span class="pl-ent">link</span> <span class="pl-e">type</span>=<span class="pl-s"><span class="pl-pds">"</span>text/css<span class="pl-pds">"</span></span> <span class="pl-e">rel</span>=<span class="pl-s"><span class="pl-pds">"</span>stylesheet<span class="pl-pds">"</span></span> <span class="pl-e">href</span>=<span class="pl-s"><span class="pl-pds">"</span>/path/to/jquery-table.min.css<span class="pl-pds">"</span></span> /&gt;
+        &lt;<span class="pl-ent">link</span> <span class="pl-e">type</span>=<span class="pl-s"><span class="pl-pds">"</span>text/css<span class="pl-pds">"</span></span> <span class="pl-e">rel</span>=<span class="pl-s"><span class="pl-pds">"</span>stylesheet<span class="pl-pds">"</span></span> <span class="pl-e">href</span>=<span class="pl-s"><span class="pl-pds">"</span>/path/to/jquery-preptable.min.css<span class="pl-pds">"</span></span> /&gt;
     &lt;/<span class="pl-ent">head</span>&gt;
     &lt;<span class="pl-ent">body</span>&gt;
         &lt;<span class="pl-ent">table</span>&gt;
@@ -50,7 +50,7 @@
             &lt;/<span class="pl-ent">thead</span>&gt;
         &lt;/<span class="pl-ent">table</span>&gt;
 <span class="pl-s1">        &lt;<span class="pl-ent">script</span> <span class="pl-e">src</span>=<span class="pl-s"><span class="pl-pds">"</span>/path/to/jquery.js<span class="pl-pds">"</span></span>&gt;&lt;/<span class="pl-ent">script</span>&gt;</span>
-<span class="pl-s1">        &lt;<span class="pl-ent">script</span> <span class="pl-e">src</span>=<span class="pl-s"><span class="pl-pds">"</span>/path/to/jquery-table.min.js<span class="pl-pds">"</span></span>&gt;&lt;/<span class="pl-ent">script</span>&gt;</span>
+<span class="pl-s1">        &lt;<span class="pl-ent">script</span> <span class="pl-e">src</span>=<span class="pl-s"><span class="pl-pds">"</span>/path/to/jquery-preptable.min.js<span class="pl-pds">"</span></span>&gt;&lt;/<span class="pl-ent">script</span>&gt;</span>
 <span class="pl-s1">        &lt;<span class="pl-ent">script</span>&gt;</span>
 <span class="pl-s1">            <span class="pl-en">$</span>(<span class="pl-s"><span class="pl-pds">'</span>table<span class="pl-pds">'</span></span>).<span class="pl-en">table</span>({</span>
 <span class="pl-s1">                data<span class="pl-k">:</span> [</span>
