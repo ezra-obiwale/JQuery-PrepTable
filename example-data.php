@@ -32,7 +32,7 @@ $data = array(
 
 $_data = array();
 $start = intval($_GET['start']);
-if (isset($_GET['sort']) && $_GET['sort']['dir'] == 'desc')
+if (isset($_GET['order']) && $_GET['order']['dir'] == 'desc')
         $data = array_reverse($data);
 foreach ($data as $key => $value) {
     if ($key < $start) continue;
@@ -42,7 +42,6 @@ foreach ($data as $key => $value) {
 
 $response = array(
     'data' => $_data,
-    'start' => $start,
     'total' => count($data),
 );
 

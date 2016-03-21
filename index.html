@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <title></title>
-        <link type="text/css" rel="stylesheet" href="assets/css/jquery-table.min.css" />
+        <link type="text/css" rel="stylesheet" href="assets/css/jquery-table.css" />
         <link type="text/css" rel="stylesheet" href="assets/css/ul-nav.css" />
         <style>
             body {
@@ -43,7 +43,70 @@
                 <li><a href="#author">Author</a></li>
             </ul>
         </nav>
-        <table width="100%" border="1" cellspacing="0">
+        <table id="table1" border="1" cellspacing="0" cellpadding="5"
+               data-pagination-numbers="true" data-limits-values="1,2,3,4,5"
+               data-limits-default="2" data-create-divs="false">
+            <thead>
+                <tr>
+                    <th>Full Name</th>
+                    <th>Gender</th>
+                    <th>Location</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>2</td>
+                    <td>3</td>
+                </tr>
+                <tr>
+                    <td>Ezra Obiwale</td>
+                    <td>Male</td>
+                    <td>Nigeria</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>3</td>
+                    <td>4</td>
+                </tr>
+                <tr>
+                    <td>Martha Guinness</td>
+                    <td>Female</td>
+                    <td>South Africa</td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>4</td>
+                    <td>5</td>
+                </tr>
+                <tr>
+                    <td>Sylvester O'brien</td>
+                    <td>Male</td>
+                    <td>USA</td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td>5</td>
+                    <td>6</td>
+                </tr>
+                <tr>
+                    <td>Thomas Edison</td>
+                    <td>Male</td>
+                    <td>England</td>
+                </tr>
+                <tr>
+                    <td>5</td>
+                    <td>6</td>
+                    <td>7</td>
+                </tr>
+                <tr>
+                    <td>Sarah Thompson</td>
+                    <td>Female</td>
+                    <td>Lesotho</td>
+                </tr>
+            </tbody>
+        </table>
+        <table id="table2" width="100%" border="1" cellspacing="0">
             <thead>
                 <tr>
                     <th>H1</th>
@@ -58,7 +121,8 @@
         <script src="assets/js/jquery-table.js"></script>
         <script>
             $(function () {
-                $('table').table({
+                $('#table1').table();
+                $('#table2').table({
                     columns: [
                         {
                             data: 'three'
@@ -89,12 +153,7 @@
                         numbers: true
                     },
                     alert_errors: false,
-                    display_errors: true,
-                    customRow: function (row, data) {
-                        $(row).children().each(function (i, v) {
-                            $(v).html('(' + data[i] + ')');
-                        });
-                    }
+                    display_errors: true
                 });
             });
         </script>
