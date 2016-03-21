@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <title></title>
-        <link type="text/css" rel="stylesheet" href="assets/css/jquery-table.css" />
+        <link type="text/css" rel="stylesheet" href="assets/css/jquery-preptable.min.css" />
         <link type="text/css" rel="stylesheet" href="assets/css/ul-nav.css" />
         <style>
             body {
@@ -45,7 +45,7 @@
         </nav>
         <table id="table1" border="1" cellspacing="0" cellpadding="5"
                data-pagination-numbers="true" data-limits-values="1,2,3,4,5"
-               data-limits-default="2" data-create-divs="false">
+               data-limits-current="2" data-create-divs="false">
             <thead>
                 <tr>
                     <th>Full Name</th>
@@ -118,44 +118,44 @@
             </thead>
         </table>
         <script src="assets/js/jquery.min.js"></script>
-        <script src="assets/js/jquery-table.js"></script>
+        <script src="assets/js/jquery-preptable.min.js"></script>
         <script>
-            $(function () {
-                $('#table1').table();
-                $('#table2').table({
-                    columns: [
-                        {
-                            data: 'three'
-                        },
-                        {
-                            data: 'five'
-                        },
-                        {
-                            data: 'one'
-                        },
-                        {
-                            data: 'four'
-                        },
-                        {
-                            data: 'two',
-                            sortable: false
-                        }
-                    ],
-                    ajax: 'example-data.php',
-                    append: false,
-                    limits: {values: [3, 5, 10, 15, 20],
-                        default: 3,
-                        all: true
-                    },
-                    pagination: {
-                        firstLast: true,
-                        nextPrevious: true,
-                        numbers: true
-                    },
-                    alert_errors: false,
-                    display_errors: true
-                });
-            });
+	    $(function() {
+		$('#table1').prepTable();
+		$('#table2').prepTable({
+		    columns: [
+			{
+			    data: 'three'
+			},
+			{
+			    data: 'five'
+			},
+			{
+			    data: 'one'
+			},
+			{
+			    data: 'four'
+			},
+			{
+			    data: 'two',
+			    sortable: false
+			}
+		    ],
+		    ajax: 'example-data.php',
+		    append: false,
+		    limits: {values: [3, 5, 10, 15, 20],
+			default: 3,
+			all: true
+		    },
+		    pagination: {
+			firstLast: true,
+			nextPrevious: true,
+			numbers: true
+		    },
+		    alert_errors: false,
+		    display_errors: true
+		});
+	    });
         </script>
     </body>
 </html>

@@ -1,4 +1,4 @@
-# JQuery-Table
-A JQuery function to parse table data or load data into the table and to search, order, and paginate the data.
+# JQuery-PrepTable
+A JQuery plugin to prepare table for searching, ordering, and paginating. The table may have existing rows or may be populated via javascript or ajax.
 
 See (http://ezra-obiwale.github.io/JQuery-Table/) for Documentation
