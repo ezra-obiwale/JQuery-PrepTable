@@ -1,11 +1,12 @@
-(function() {
+(function () {
     var __data = {length: 0}, __page_data = {};
     /**
      * Sort, paginate and search table
      * @param {object} settings
      * @returns {jQuery.fn}
+     * @todo Check loading non-loaded pages when appending (and caching).
      */
-    jQuery.fn.prepTable = function(settings) {
+    jQuery.fn.prepTable = function (settings) {
 	var config = {
 	    columns: [],
 	    data: [],
@@ -29,14 +30,14 @@
 	    alert_errors: true,
 	    cache: false,
 	    createDivs: true,
-	    createRow: function(row, data, index) {
+	    createRow: function (row, data, index) {
 		if ($.isPlainObject(data) && config.columns.length) {
-		    $.each(config.columns, function(i, v) {
+		    $.each(config.columns, function (i, v) {
 			$(row).append('<td>' + data[v.data] + '</td>');
 		    });
 		}
 		else if ($.isArray(data)) {
-		    $.each(data, function(i, v) {
+		    $.each(data, function (i, v) {
 			$(row).append('<td>' + v + '</td>');
 		    });
 		}
@@ -50,7 +51,7 @@
 	function addOrders(id) {
 	    if (__data[id].sortable === false || (__data[id].sortable == undefined && !config.sortable))
 		return;
-	    $.each($('#' + id + '>table>thead>tr>th'), function(i, v) {
+	    $.each($('#' + id + '>table>thead>tr>th'), function (i, v) {
 		if ($(this).hasClass('no-sort') ||
 			(config.columns[i] && config.columns[i].sortable === false))
 		    return true;
@@ -74,7 +75,7 @@
 		$select.parent().css('display', 'none');
 		defaults = 'all';
 	    }
-	    $.each(values, function(i, v) {
+	    $.each(values, function (i, v) {
 		var selected = (v == defaults) ? 'selected="selected"' : '';
 		$select.append('<option ' + selected + ' value="' + v + '">' + v + '</option>');
 	    });
@@ -83,12 +84,13 @@
 			+ ' value="">All</option>');
 	}
 	function createSearch(id) {
-	    var $label = $('#' + id + ' .before-table').append('<label class="jq-search">Search <input type="text" /></label>')
-		    .children('label.search');
+	    var $label = $('#' + id + ' .before-table')
+		    .append('<label class="jq-search">Search <input type="text" /></label>')
+		    .children('label.jq-search');
 
 	    if (__data[id].searchable === false || (__data[id].searchable === undefined && !config.searchable))
 		$label.css('display', 'none');
-	    $.each(config.columns, function(i, v) {
+	    $.each(config.columns, function (i, v) {
 		if (v.searchable !== undefined && !v.searchable)
 		    return true;
 		if (!__data[id]['searchables'])
@@ -213,7 +215,7 @@
 	    __page_data[id]['rows'] = $('#' + id + '>table>tbody>tr');
 	    __data[id].total = __page_data[id].rows.length;
 	    if (getLimit(id) !== '') { // show limit
-		$('#' + id + '>table>tbody>tr').each(function(i, v) {
+		$('#' + id + '>table>tbody>tr').each(function (i, v) {
 		    if (i == getLimit(id))
 			return false;
 		    $(v).addClass('__showing');
@@ -241,7 +243,7 @@
 		sortData(id);
 		__page_data[id].order = __data[id].order;
 	    }
-	    $.each(__page_data[id].rows, function(i, v) {
+	    $.each(__page_data[id].rows, function (i, v) {
 		if (search && $(v).text().toLowerCase().indexOf(search) == -1) { // searching but not found
 		    return true;
 		}
@@ -273,7 +275,7 @@
 			.html(__data[id].emptyMessage || config.empty_message).show();
 	}
 	function sortData(id) {
-	    return __page_data[id].rows.sort(function(a, b) {
+	    return __page_data[id].rows.sort(function (a, b) {
 		var A = $(a).children('td').eq(__data[id].order.index).text().toUpperCase(),
 			B = $(b).children('td').eq(__data[id].order.index).text().toUpperCase();
 		if (A < B) {
@@ -316,7 +318,7 @@
 	    $('#' + id + ' .jq-msg').addClass('info').html(__data[id].loadingMessage || config.loading_message).fadeIn();
 	    var url = __data[id].ajax.url, data = {}, limit = getLimit(id);
 	    if (__data[id].ajax.type.toLowerCase() === 'get') {
-		url += '?search[columns]=' + encodeURIComponent(__data[id].searchables) + '&search[value]=' + encodeURIComponent($('#' + id + ' .before-table>label.search>input').val())
+		url += '?search[columns]=' + encodeURIComponent(__data[id].searchables) + '&search[value]=' + encodeURIComponent($('#' + id + ' .before-table>label.jq-search>input').val())
 			+ '&limit=' + (!isNaN(limit) ? limit : '') + '&start=' + (!isNaN(limit) ? limit * __data[id].start : 0);
 		if (__data[id].order)
 		    url += '&order[column]=' + __data[id].order.column + '&order[dir]=' + __data[id].order.dir;
@@ -324,7 +326,7 @@
 		data = {
 		    search: {
 			columns: __data[id].searchables,
-			value: encodeURIComponent($('#' + id + ' .before-table>label.search>input').val())
+			value: encodeURIComponent($('#' + id + ' .before-table>label.jq-search>input').val())
 		    },
 		    limit: !isNaN(limit) ? limit : '',
 		    start: !isNaN(limit) ? limit * __data[id].start : 0
@@ -337,7 +339,7 @@
 		url: url,
 		data: data,
 		type: __data[id].ajax.type,
-		success: function(data) {
+		success: function (data) {
 		    if (__data[id].logData || (__data[id].logData !== false && config.log_data))
 			console.info('RESPONSE', data);
 		    if (typeof data === 'string')
@@ -346,7 +348,7 @@
 		    useData(id, data);
 		    $('#' + id + ' .jq-msg').hide();
 		},
-		error: function(x) {
+		error: function (x) {
 		    error(id, 'T0', 'Connection error: ' + x.responseText);
 		}
 	    });
@@ -396,7 +398,7 @@
 	    var $tbody = $table.children('tbody');
 	    if (!__data[id].append)
 		$tbody.html('');
-	    $.each(data.data, function(i, v) {
+	    $.each(data.data, function (i, v) {
 		if (!data.ajax) {
 		    if (data.start && i < data.start)
 			return true;
@@ -411,7 +413,7 @@
 		    config.createRow.call($('#' + id + '>table')[0], $tr[0], v, i);
 	    });
 	}
-	this.each(function(i, v) {
+	this.each(function (i, v) {
 	    var id = 'table_' + __data.length;
 	    __data.length++;
 	    __data[id] = $.extend({}, $(v).data());
@@ -446,7 +448,7 @@
 		    __data[id]['createRow'] = window[func];
 		} else if (func.indexOf('.') != -1) {
 		    var callback = window;
-		    $.each(func.split('.'), function(i, v) {
+		    $.each(func.split('.'), function (i, v) {
 			if (callback[v])
 			    callback = callback[v];
 			else
@@ -481,7 +483,7 @@
 		parseTable(id);
 	    }
 
-	    $(v).parent().on('change', '.before-table .jq-limit>select', function() {
+	    $(v).parent().on('change', '.before-table .jq-limit>select', function () {
 		var id = $(this).closest('.jq-table').attr('id');
 		// Ensure display of data if limit is going out of boundary
 		if ($(this).val() && __data[id].start * parseInt($(this).val()) > __data[id].total)
@@ -493,7 +495,7 @@
 		}
 		loadPage(id, __data[id].start, __data[id].append);
 	    });
-	    $(v).parent().on('click', 'table>thead>tr>th.sort', function() {
+	    $(v).parent().on('click', 'table>thead>tr>th.sort', function () {
 		var id = $(this).closest('.jq-table').attr('id');
 		$(this).siblings().removeClass('asc desc');
 		__data[id].order = {
@@ -510,7 +512,7 @@
 		console.log('click')
 		loadPage(id, __data[id].start, __data[id].append);
 	    });
-	    $(v).parent().on('click', '.after-table>.jq-pagination>button', function() {
+	    $(v).parent().on('click', '.after-table>.jq-pagination>button', function () {
 		if ($(this).hasClass('disabled'))
 		    return;
 		$(this).addClass('disabled');
@@ -540,7 +542,7 @@
 		}
 		loadPage(id, __data[id].start, append);
 	    });
-	    $(v).parent().on('keyup', '.before-table .jq-search>input', function() {
+	    $(v).parent().on('keyup', '.before-table .jq-search>input', function () {
 		var id = $(this).closest('.jq-table').attr('id');
 		clearTimeout(__data[id].timeout);
 		__data[id].start = 0;
