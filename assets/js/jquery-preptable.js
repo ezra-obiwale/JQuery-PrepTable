@@ -85,8 +85,8 @@
 	}
 	function createSearch(id) {
 	    var $label = $('#' + id + ' .before-table')
-		    .append('<label class="jq-search">Search <input type="text" /></label>')
-		    .children('label.jq-search');
+		    .append('<div class="jq-search"><label for="search">Search</label> <input id="search" type="text" /></div>')
+		    .children('.jq-search');
 
 	    if (__data[id].searchable === false || (__data[id].searchable === undefined && !config.searchable))
 		$label.css('display', 'none');
@@ -234,7 +234,7 @@
 	}
 	function loadDOMNext(id, start) {
 	    var $tbody = $('#' + id + '>table>tbody'),
-		    search = $('#' + id + ' .before-table .jq-search>input').val().toLowerCase(),
+		    search = $('#' + id + ' .before-table .jq-search input').val().toLowerCase(),
 		    total = 0, shown = 0, skipped = 0;
 	    $('#' + id + ' .jq-msg').addClass('info').hide();
 	    if (__data[id].order && (!__page_data[id].order || __page_data[id].order
@@ -318,7 +318,7 @@
 	    $('#' + id + ' .jq-msg').addClass('info').html(__data[id].loadingMessage || config.loading_message).fadeIn();
 	    var url = __data[id].ajax.url, data = {}, limit = getLimit(id);
 	    if (__data[id].ajax.type.toLowerCase() === 'get') {
-		url += '?search[columns]=' + encodeURIComponent(__data[id].searchables) + '&search[value]=' + encodeURIComponent($('#' + id + ' .before-table>label.jq-search>input').val())
+		url += '?search[columns]=' + encodeURIComponent(__data[id].searchables) + '&search[value]=' + encodeURIComponent($('#' + id + ' .before-table>.jq-search input').val())
 			+ '&limit=' + (!isNaN(limit) ? limit : '') + '&start=' + (!isNaN(limit) ? limit * __data[id].start : 0);
 		if (__data[id].order)
 		    url += '&order[column]=' + __data[id].order.column + '&order[dir]=' + __data[id].order.dir;
@@ -326,7 +326,7 @@
 		data = {
 		    search: {
 			columns: __data[id].searchables,
-			value: encodeURIComponent($('#' + id + ' .before-table>label.jq-search>input').val())
+			value: encodeURIComponent($('#' + id + ' .before-table>.jq-search input').val())
 		    },
 		    limit: !isNaN(limit) ? limit : '',
 		    start: !isNaN(limit) ? limit * __data[id].start : 0
@@ -542,7 +542,7 @@
 		}
 		loadPage(id, __data[id].start, append);
 	    });
-	    $(v).parent().on('keyup', '.before-table .jq-search>input', function () {
+	    $(v).parent().on('keyup', '.before-table .jq-search input', function () {
 		var id = $(this).closest('.jq-table').attr('id');
 		clearTimeout(__data[id].timeout);
 		__data[id].start = 0;
