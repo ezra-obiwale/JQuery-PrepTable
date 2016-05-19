@@ -303,7 +303,7 @@
 		if (!append && __data[id].append) {
 		    createLabel(id, __page_data[id][start], true);
 		    createPagination(id, __page_data[id][start]);
-		} else if (__page_data[id].rows)
+		} else if (__page_data[id] && __page_data[id].rows)
 		    loadDOMNext(id, getLimit(id) ? start * getLimit(id) : 0);
 		else
 		    fetchData(id);
@@ -509,7 +509,6 @@
 		    __data[id].order['dir'] = 'asc';
 		    $(this).removeClass('desc').addClass('asc');
 		}
-		console.log('click')
 		loadPage(id, __data[id].start, __data[id].append);
 	    });
 	    $(v).parent().on('click', '.after-table>.jq-pagination>button', function () {
